@@ -22,7 +22,7 @@ module CsvImporter
       cbsa_code = row[1]
       cbsa = Cbsa.find_or_create_by(code: cbsa_code)
       zip_code = ZipCode.find_or_create_by(code: zip_code)
-      zip_code.cbsas << cbsa if cbsa.present? and zip_code.present?
+      zip_code.cbsas << cbsa if cbsa.present? && zip_code.present?
     end
   end
 
@@ -52,7 +52,7 @@ module CsvImporter
       end
 
       # if msa is present see if the population has been updated
-      msa = Msa.find_or_create_by(cbsa_id: cbsa.id, mdiv: mdiv, stcou: row[2], name: row[3].encode('UTF-8', :invalid => :replace, :undef => :replace), lsad: row[4])
+      msa = Msa.find_or_create_by(cbsa_id: cbsa.id, mdiv: mdiv, stcou: row[2], name: row[3].encode('UTF-8', invalid: :replace, undef: :replace), lsad: row[4])
       msa.pop_estimate_2010 = row[7] if msa.pop_estimate_2010 != row[7]
       msa.pop_estimate_2011 = row[8] if msa.pop_estimate_2011 != row[8]
       msa.pop_estimate_2012 = row[9] if msa.pop_estimate_2012 != row[9]

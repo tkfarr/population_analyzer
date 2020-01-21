@@ -7,7 +7,7 @@ class ZipCode < ApplicationRecord
   def retrieve_matching_msa
     Msa.find_by_sql("
       SELECT
-        #{self.code} AS zip,
+        #{code} AS zip,
         msas.name AS msa,
         cbsas.code AS cbsa,
         msas.pop_estimate_2015 AS pop2015,
@@ -19,7 +19,7 @@ class ZipCode < ApplicationRecord
         SELECT
           cbsa_id
         FROM cbsas_zip_codes
-        WHERE zip_code_id = #{self.id}
+        WHERE zip_code_id = #{id}
       )
     ").first
   end

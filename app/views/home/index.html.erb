@@ -1,7 +1,10 @@
 <h1>Search for a Metropolitan Statistical Area</h1>
 <div>
-  <%= form_tag(by_zip_msas_path) do %>
+  <%= form_tag home_index_path, method: :post do %>
     <%= text_field_tag :zip, nil, placeholder: 'Enter zip code to search...' %>
     <%= submit_tag 'Search', data: { disable_with: 'Searching...' } %>
   <% end %>
+</div>
+<div>
+  <p>Result: <%= @result if @result.present? %></p>
 </div>
