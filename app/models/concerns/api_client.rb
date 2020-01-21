@@ -6,7 +6,7 @@ class ApiClient
   def get_url
     url = URI.parse(build_route)
     http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
+    # http.use_ssl = true
     res = http.get(url.request_uri, { 'Content-Type' => 'application/json' })
     JSON.parse(res.body)
   end
