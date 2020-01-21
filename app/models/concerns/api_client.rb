@@ -14,7 +14,7 @@ class ApiClient
   private
 
   def base_route
-    Rails.env.production ? 'http://population-analyzer.herokuapp.com/' : 'http://population-analyzer-staging.herokuapp.com/'
+    Rails.env.production? ? 'http://population-analyzer.herokuapp.com/' : 'http://population-analyzer-staging.herokuapp.com/'
   end
 
   def build_route
