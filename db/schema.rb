@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_20_022810) do
+ActiveRecord::Schema.define(version: 2020_01_21_001123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2020_01_20_022810) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["code"], name: "index_cbsas_on_code"
+  end
+
+  create_table "cbsas_zip_codes", force: :cascade do |t|
+    t.integer "cbsa_id"
+    t.integer "zip_code_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cbsa_id"], name: "index_cbsas_zip_codes_on_cbsa_id"
+    t.index ["zip_code_id"], name: "index_cbsas_zip_codes_on_zip_code_id"
   end
 
   create_table "msas", force: :cascade do |t|
@@ -42,10 +51,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_022810) do
 
   create_table "zip_codes", force: :cascade do |t|
     t.integer "code"
-    t.integer "cbsa_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["cbsa_id"], name: "index_zip_codes_on_cbsa_id"
     t.index ["code"], name: "index_zip_codes_on_code"
   end
 
