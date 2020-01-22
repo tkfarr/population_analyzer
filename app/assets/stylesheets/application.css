@@ -13,3 +13,38 @@
  *= require_tree .
  *= require_self
  */
+
+html, body {
+  height:100%;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  background-image: url('bw_nyc_central_aerial.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: stretch;
+}
+
+body {
+  background:rgba(0, 0, 0, 0.7);
+}
+
+#main-div {
+  border-radius: 1%;
+  background: white;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70%;
+  width: 50%;
+  box-shadow: 0px 6px 20px 13px rgba(0,0,0,0.75);
+  text-align: center;
+}
+
+.error {
+  color: #dc3545;
+}

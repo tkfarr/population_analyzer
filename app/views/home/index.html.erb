@@ -1,10 +1,41 @@
-<h1>Search for a Metropolitan Statistical Area</h1>
-<div>
-  <%= form_tag home_index_path, method: :post do %>
-    <%= text_field_tag :zip, nil, placeholder: 'Enter zip code to search...' %>
-    <%= submit_tag 'Search', data: { disable_with: 'Searching...' } %>
-  <% end %>
-</div>
-<div>
-  <p>Result: <%= @result if @result.present? %></p>
+<div id='main-div'>
+  <div class="jumbotron">
+    <div class="container" style="word-wrap: break-word; white-space: normal">
+      <h1 class="display-5">Population Analyzer</h1>
+      <p class="lead">Get Metropolitan Statistical Area Data by Zip Code</p>
+    </div>
+    <section class='row' style='margin: 0 auto;'>
+      <div class='col-md-6' style='text-align: center; margin: 0 auto;'>
+        <%= form_tag home_index_path, method: :post do %>
+        <div class="input-group mb-3">
+          <%= text_field_tag :zip, nil, placeholder: 'Enter zip code to search...', required: true, class: "form-control form-control-md"%>
+          <div class="input-group-append">
+            <%= submit_tag 'Search', data: { disable_with: 'Searching...' }, class: "btn btn-md btn-outline-dark" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </section>
+  </div>
+  <section class='row'>
+    <div class='col-md-12'>
+      <% if @result.present? %>
+        <% if @result['error'].present? %>
+          <h6 class='error'><%= @result['error'] %></h6>
+        <% else %>
+          <h5>MSA Data</h5>
+          <% @result.each do |key, value| %>
+            <div class='row'>
+              <div class='col-md-4 col-sm-6' style='text-align: right;'>
+                <strong><%=key%></strong>
+              </div>
+              <div class='col-md-8 col-sm-6' style='text-align: left;'>
+                <%=value%>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
 </div>
