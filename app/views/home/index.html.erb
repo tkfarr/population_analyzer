@@ -19,24 +19,23 @@
   </div>
   <section class='row' style='margin-top: -.5em;'>
     <div class='col-md-12'>
-      <% if @result.present? %>
-        <% if @result['error'].present? %>
-          <h6 class='error'><%= @result['error'] %></h6>
-        <% else %>
-          <div class='row'>
-            <% @result.each do |key, value| %>
-              <% unless key.include?('pop') %>
-                <div class='col-md-4 col-sm-4'>
-                  <h5><%=key.upcase%></h5>
-                  <p><%=value%></p>
-                </div>
-              <% end %>
+      <% if @error %>
+        <h6 class='error'><%= @error %></h6>
+      <% end %>
+      <% if @result %>
+        <div class='row'>
+          <% @result.each do |key, value| %>
+            <% unless key.include?('pop') %>
+              <div class='col-md-4 col-sm-4'>
+                <h5><%=key.upcase%></h5>
+                <p><%=value%></p>
+              </div>
             <% end %>
-          </div>
-          <div class='row' style='margin-left: 20px; margin-right: 20px;'>
-            <%= column_chart @result.reject{|key, value| key.exclude?('pop')}.reverse_each.to_h, { height: '100%', label: "Value", xtitle: "Year", ytitle: "Population" } %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+        <div class='row' style='margin-left: 20px; margin-right: 20px;'>
+          <%= column_chart @result.reject{|key, value| key.exclude?('pop')}.reverse_each.to_h, { height: '100%', label: "Value", xtitle: "Year", ytitle: "Population" } %>
+        </div>
       <% end %>
     </div>
   </section>
