@@ -4,7 +4,7 @@ class HomeController < ApplicationController
       search_url = "/api/v1/msas/by_zip?zip=#{home_params[:zip]}"
       @result = ApiClient.new(search_url).get_url_to_json
     end
-  rescue StandardError => error
+  rescue StandardError => e
     @result = { error: 'API error occured' }
   end
 
