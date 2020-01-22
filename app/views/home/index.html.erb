@@ -34,7 +34,7 @@
           <% end %>
         </div>
         <div class='row' style='margin-left: 20px; margin-right: 20px;'>
-          <%= column_chart @result.reject{|key, value| key.exclude?('pop')}.reverse_each.to_h, { height: '100%', label: "Value", xtitle: "Year", ytitle: "Population" } %>
+          <%= column_chart @chart_data, { height: '100%', label: "Value", xtitle: "Year", ytitle: "Population" } %>
         </div>
       <% end %>
     </div>

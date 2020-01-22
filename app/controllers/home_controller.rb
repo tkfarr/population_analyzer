@@ -5,6 +5,7 @@ class HomeController < ApplicationController
       response = ApiClient.new(search_url).get_url_to_json
       @error = response['error'] if response['error'].present?
       @result = response['data'] if @error.blank?
+      @chart_data = @result.reject{ |key, value| key.exclude?('pop')} if @result.present?
     end
   rescue StandardError => e
     render json: { error: "API error occured: #{e}", status: 500 }, status: :internal_server_error
