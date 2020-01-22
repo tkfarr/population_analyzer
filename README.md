@@ -1,24 +1,5 @@
-# README
+# Population Analyzer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+View the application here: https://population-analyzer.herokuapp.com/
+Access the API directly here with desired <zip_code> to search: https://population-analyzer.herokuapp.com/api/v1/msas/by_zip?zip=<zip_code>
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
