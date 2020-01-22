@@ -2,17 +2,16 @@ class Api::V1::MsasController < Api::V1::BaseApiV1Controller
   before_action :verify_zip, :set_zip_code
 
   def by_zip
-    result = @zip_code.retrieve_matching_msa
+    data = @zip_code.retrieve_matching_msa
 
-    if result.present?
-      result = result.attributes
+    if data.present?
+      data = data.attributes
       # Clean up json output
-      result.delete('id')
+      data.delete('id')
+      render json: { data: data, status: 200 }, status: 200
     else
-      result = { error: 'No MSA found by that Zip Code' }
+      render json: { error: 'No MSA found by that Zip Code', status: 400 }, status: :bad_request
     end
-
-    render json: result
   end
 
   private
@@ -24,12 +23,12 @@ class Api::V1::MsasController < Api::V1::BaseApiV1Controller
   def verify_zip
     ZipCodeService.new(msas_params[:zip]).verify
   rescue StandardError => e
-    render json: { error: e.message }
+    render json: { error: e.message, status: 400 }, status: :bad_request
   end
 
   def set_zip_code
     @zip_code = ZipCode.find_by_code!(msas_params[:zip])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'No Zip Code found' }
+    render json: { error: 'No Zip Code found', status: 400 }, status: :bad_request
   end
 end

@@ -2,10 +2,12 @@ class HomeController < ApplicationController
   def index
     if home_params[:zip]
       search_url = "/api/v1/msas/by_zip?zip=#{home_params[:zip]}"
-      @result = ApiClient.new(search_url).get_url_to_json
+      response = ApiClient.new(search_url).get_url_to_json
+      @error = response['error'] if response['error'].present?
+      @result = response['data'] if @error.blank?
     end
   rescue StandardError => e
-    @result = { error: 'API error occured' }
+    render json: { error: "API error occured: #{e}", status: 500 }, status: :internal_server_error
   end
 
   private
