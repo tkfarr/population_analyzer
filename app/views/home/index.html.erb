@@ -17,23 +17,25 @@
       </div>
     </section>
   </div>
-  <section class='row'>
+  <section class='row' style='margin-top: -.5em;'>
     <div class='col-md-12'>
       <% if @result.present? %>
         <% if @result['error'].present? %>
           <h6 class='error'><%= @result['error'] %></h6>
         <% else %>
-          <h5>MSA Data</h5>
-          <% @result.each do |key, value| %>
-            <div class='row'>
-              <div class='col-md-4 col-sm-6' style='text-align: right;'>
-                <strong><%=key%></strong>
-              </div>
-              <div class='col-md-8 col-sm-6' style='text-align: left;'>
-                <%=value%>
-              </div>
-            </div>
-          <% end %>
+          <div class='row'>
+            <% @result.each do |key, value| %>
+              <% unless key.include?('pop') %>
+                <div class='col-md-4 col-sm-4'>
+                  <h5><%=key.upcase%></h5>
+                  <p><%=value%></p>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class='row' style='margin-left: 20px; margin-right: 20px;'>
+            <%= column_chart @result.reject{|key, value| key.exclude?('pop')}.reverse_each.to_h, { height: '100%', label: "Value", xtitle: "Year", ytitle: "Population" } %>
+          </div>
         <% end %>
       <% end %>
     </div>
