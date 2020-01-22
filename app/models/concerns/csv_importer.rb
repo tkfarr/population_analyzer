@@ -22,7 +22,8 @@ module CsvImporter
       cbsa_code = row[1]
       cbsa = Cbsa.find_or_create_by(code: cbsa_code)
       zip_code = ZipCode.find_or_create_by(code: zip_code)
-      zip_code.cbsas << cbsa if cbsa.present? && zip_code.present?
+      # Avoid duplicates
+      zip_code.cbsas << cbsa unless zip_code.cbsas.include?(cbsa)
     end
   end
 
@@ -34,7 +35,7 @@ module CsvImporter
       cbsa_code = row[0]
       mdiv = row[1]
 
-      #  Look up the CBSA provided by the Step 1 in Column 2 (MDIV). If present, then use the corresponding CBSA in Column 1 going forward. If not found, then continue to use that of Step 1.
+      #  Look up the CBSA provided by MDIV first. Update to use CBSA id in Col for future lookups.
       if mdiv.present?
         original_cbsa = Cbsa.find_or_create_by(code: mdiv)
         new_cbsa = Cbsa.find_or_create_by(code: cbsa_code)
@@ -42,7 +43,8 @@ module CsvImporter
         if original_cbsa.present?
           original_cbsa.zip_codes.each do |zip_code|
             zip_code.cbsas.delete(original_cbsa)
-            zip_code.cbsas << new_cbsa
+            # Avoid duplicates
+            zip_code.cbsas << new_cbsa unless zip_code.cbsas.include?(new_cbsa)
           end
         end
 

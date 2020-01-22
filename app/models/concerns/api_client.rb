@@ -6,7 +6,7 @@ class ApiClient
   def get_url
     url = URI.parse(build_route)
     http = Net::HTTP.new(url.host, url.port)
-    # http.use_ssl = true
+    http.use_ssl = true
     res = http.get(url.request_uri, { 'Content-Type' => 'application/json' })
     JSON.parse(res.body)
   end
@@ -14,7 +14,7 @@ class ApiClient
   private
 
   def base_route
-    Rails.env.production? ? 'http://population-analyzer.herokuapp.com/' : 'http://population-analyzer-staging.herokuapp.com/'
+    Rails.env.production? ? 'https://population-analyzer.herokuapp.com/' : 'https://population-analyzer-staging.herokuapp.com/'
   end
 
   def build_route
