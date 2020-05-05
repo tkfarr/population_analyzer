@@ -6,7 +6,7 @@ class ApiClient
   def get_url_to_json
     url = URI.parse(build_route)
     http = Net::HTTP.new(url.host, url.port)
-    http.use_ssl = true
+    http.use_ssl = Rails.env.production?
     res = http.get(url.request_uri, 'Content-Type' => 'application/json')
     JSON.parse(res.body)
   end
@@ -14,7 +14,13 @@ class ApiClient
   private
 
   def base_route
-    Rails.env.production? ? 'https://population-analyzer.herokuapp.com/' : 'https://population-analyzer-staging.herokuapp.com/'
+    if Rails.env.development?
+      'http://localhost:3000/'
+    elsif Rails.env.production?
+      'https://population-analyzer.herokuapp.com/'
+    else
+      'https://population-analyzer-staging.herokuapp.com/'
+    end
   end
 
   def build_route
