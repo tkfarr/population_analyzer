@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reports, only: [:index]
+
   namespace :api do
     namespace :v1 do
       resources :msas, only: [] do
