@@ -7,7 +7,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :reports, only: [:index]
+  resources :reports, only: [:index] do
+    collection do
+      get :index
+      post :index
+      post :search_zip
+    end
+  end
 
   namespace :api do
     namespace :v1 do

@@ -2,5 +2,44 @@
 <div id='reports-div'>
   <div class="container" style="word-wrap: break-word; white-space: normal">
     <h2 class="display-5">Reports</h2>
+     <section class='row' style='margin: 0 auto;'>
+      <div class='col-md-8' style='text-align: center; margin: 0 auto;'>
+        <%= form_tag reports_path, method: :post do %>
+        <div class="input-group mb-3">
+          <%= text_field_tag :zip, nil, placeholder: 'Enter zip code to search...', required: true, class: "form-control form-control-md"%>
+          <div class="input-group-append ">
+            <%= submit_tag 'Search', data: { disable_with: 'Searching...' }, class: "btn btn-md btn-outline-dark" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </section>
   </div>
+  <% if @results.blank? %>
+    <div class='container'>
+      <p class='error'>No data found for that zip code.</p>
+    </div>
+  <% else %>
+    <div class='container'>
+      <table class="table">
+        <thead>
+          <tr>
+            <% @results.first.attributes.keys.each do |column_name| %>
+              <th scope="col"><%= column_name.humanize.titleize %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @results.each do |result| %>
+            <tr>
+              <th scope="row"><%= result.id %></th>
+              <td><%= result.field %></td>
+              <td><%= result.field %></td>
+              <td><%= result.field %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 </div>
