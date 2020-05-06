@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get :index
       post :index
       post :search_zip
+      post :export
     end
   end
 

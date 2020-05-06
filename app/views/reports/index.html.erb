@@ -1,19 +1,20 @@
 
 <div id='reports-div'>
+  <%= button_to 'Export Data', export_reports_path, class: 'btn btn-md btn-outline-info',  style: 'margin-top: 10px; margin-right: 10px; float: right;', id: 'reports-export-btn' if @msa_avg_data %>
   <div class="container" style="word-wrap: break-word; white-space: normal; margin-top: 20px; margin-bottom: 20px;">
-    <h2>Reports</h2>
-     <section class='row' style='margin: 0 auto;'>
-      <div class='col-md-8' style='text-align: center; margin: 0 auto;'>
+    <h2>Population Insights by Zip Code</h2>
+    <section class='row center'>
+      <div class='col-md-8' style='margin: 0 auto;'>
         <%= form_tag search_zip_reports_path, method: :post do %>
-        <div class="input-group mb-3">
-          <%= text_field_tag :zip_code, nil, placeholder: 'Enter zip code to search...', required: true, class: "form-control form-control-md"%>
-          <div class="input-group-append ">
-            <%= submit_tag 'Search', data: { disable_with: 'Searching...' }, class: "btn btn-md btn-outline-dark" %>
+          <div class="input-group mb-3">
+            <%= text_field_tag :zip_code, '', placeholder: 'Enter zip code to search...', required: true, class: "form-control form-control-md"%>
+            <div class="input-group-append ">
+              <%= submit_tag 'Search', data: { disable_with: 'Searching...' }, class: "btn btn-md btn-outline-dark" %>
+            </div>
           </div>
-        </div>
         <% end %>
       </div>
-      <div class='container col-md-6'>
+      <div class='container col-md-12'>
         <% flash.each do |type, msg| %>
           <div class="error">
             <%= msg %>
