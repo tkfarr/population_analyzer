@@ -29,20 +29,24 @@
     </div>
   <% else %>
     <div class='container' id='reports-div-body'>
-      <div class='col-md-4'>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h4 class="card-title">Zip Code: <%=@zip_code%></h4>
-            <h6 class="card-title">Area: <%=@msa_avg_data.name%></h6>
-            <p class="card-text small">The following are averages for the years 2010 through 2015.</p>
+      <div class='row'>
+        <div class='col-md-4'>
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h4 class="card-title">Zip Code: <%=@zip_code%></h4>
+              <h6 class="card-title">Area: <%=@msa_avg_data.name%></h6>
+              <p class="card-text small">The following are averages for the years 2010 through 2015.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><p>Population Size: </p><h5><%=number_with_delimiter(@msa_avg_data.avg_pop)%></h5></li>
+              <li class="list-group-item"><p>Population Change: </p><h5><%=number_with_delimiter(@msa_avg_data.avg_pop_change_blah)%></h5></li>
+              <li class="list-group-item"><p>Births: </p><h5><%=number_with_delimiter(@msa_avg_data.avg_births)%></h5></li>
+              <li class="list-group-item"><p>Deaths: </p><h5><%=number_with_delimiter(@msa_avg_data.avg_deaths)%></h5></li>
+              <li class="list-group-item"><p>Population Increase: </p><h5><%=number_with_delimiter(@msa_avg_data.avg_natural_inc)%></h5></li>
+            </ul>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><p>Population Size: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_pop)%></h4></li>
-            <li class="list-group-item"><p>Population Change: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_pop_change_blah)%></h4></li>
-            <li class="list-group-item"><p>Births: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_births)%></h4></li>
-            <li class="list-group-item"><p>Deaths: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_deaths)%></h4></li>
-            <li class="list-group-item"><p>Population Increase: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_natural_inc)%></h4></li>
-          </ul>
+        </div>
+        <div class='col-md-8' id='reports-natural-increase'>
         </div>
       </div>
     </div>

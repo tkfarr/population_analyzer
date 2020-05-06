@@ -4,6 +4,12 @@ class ReportsController < ApplicationController
 
   def index
     @msa_avg_data = Report.msa_avgs_over_years(@zip_code) if @zip_code.present?
+    @msa_natural_increase = Report.msa_natural_increase_in_county_vs_state(@zip_code) if @zip_code.present?
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @msa_natural_increase }
+    end
   end
 
   def search_zip
