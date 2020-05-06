@@ -1,44 +1,31 @@
 class ReportsController < ApplicationController
-  before_action :set_results, only: :index
+  before_action :verify_zip, only: :search_zip
+  before_action :set_zip_session
 
   def index
+    @msa_avg_data = Report.msa_avgs_over_years(@zip_code) if @zip_code.present?
   end
 
   def search_zip
-    verify_zip
-    set_zip
-    set_results(Report.data_by_zip(@zip_code))
     redirect_to reports_path
   end
 
   private
 
   def reports_params
-    params.permit(:zip)
+    params.permit(:zip_code, :authenticity_token, :commit)
   end
 
   def verify_zip
-    begin
-      ZipCodeService.new(reports_params[:zip]).verify
-    rescue StandardError => error
-      redirect_to reports_path, alert: error.message
-    end
+    ZipCodeService.new(reports_params[:zip_code]).verify
+  rescue StandardError => e
+    redirect_to reports_path, alert: e.message
   end
 
-  def set_zip
-    begin
-      @zip_code = ZipCode.find_by_code!(reports_params[:zip])
-    rescue ActiveRecord::RecordNotFound => error
-      redirect_to reports_path, alert: error.message
-    end
-  end
+  def set_zip_session
+    params[:zip_code] ||= session[:zip_code]
+    session[:zip_code] = params[:zip_code]
 
-  def set_results(results=nil)
-    unless results.blank?
-      results ||= session[:results]
-      session[:results] = results
-    end
-
-    @results = session[:results]
+    @zip_code = params[:zip_code]
   end
 end

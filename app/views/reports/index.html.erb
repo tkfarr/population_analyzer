@@ -1,45 +1,50 @@
 
 <div id='reports-div'>
-  <div class="container" style="word-wrap: break-word; white-space: normal">
-    <h2 class="display-5">Reports</h2>
+  <div class="container" style="word-wrap: break-word; white-space: normal; margin-top: 20px; margin-bottom: 20px;">
+    <h2>Reports</h2>
      <section class='row' style='margin: 0 auto;'>
       <div class='col-md-8' style='text-align: center; margin: 0 auto;'>
-        <%= form_tag reports_path, method: :post do %>
+        <%= form_tag search_zip_reports_path, method: :post do %>
         <div class="input-group mb-3">
-          <%= text_field_tag :zip, nil, placeholder: 'Enter zip code to search...', required: true, class: "form-control form-control-md"%>
+          <%= text_field_tag :zip_code, nil, placeholder: 'Enter zip code to search...', required: true, class: "form-control form-control-md"%>
           <div class="input-group-append ">
             <%= submit_tag 'Search', data: { disable_with: 'Searching...' }, class: "btn btn-md btn-outline-dark" %>
           </div>
         </div>
         <% end %>
       </div>
+      <div class='container col-md-6'>
+        <% flash.each do |type, msg| %>
+          <div class="error">
+            <%= msg %>
+          </div>
+        <% end %>
+      </div>
     </section>
   </div>
-  <% if @results.blank? %>
+
+  <% if @msa_avg_data.blank? %>
     <div class='container'>
-      <p class='error'>No data found for that zip code.</p>
+      <p>No results found.</p>
     </div>
   <% else %>
-    <div class='container'>
-      <table class="table">
-        <thead>
-          <tr>
-            <% @results.first.attributes.keys.each do |column_name| %>
-              <th scope="col"><%= column_name.humanize.titleize %></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% @results.each do |result| %>
-            <tr>
-              <th scope="row"><%= result.id %></th>
-              <td><%= result.field %></td>
-              <td><%= result.field %></td>
-              <td><%= result.field %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+    <div class='container' id='reports-div-body'>
+      <div class='col-md-4'>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h4 class="card-title">Zip Code: <%=@zip_code%></h4>
+            <h6 class="card-title">Area: <%=@msa_avg_data.name%></h6>
+            <p class="card-text small">The following are averages for the years 2010 through 2015.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><p>Population Size: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_pop)%></h4></li>
+            <li class="list-group-item"><p>Population Change: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_pop_change_blah)%></h4></li>
+            <li class="list-group-item"><p>Births: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_births)%></h4></li>
+            <li class="list-group-item"><p>Deaths: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_deaths)%></h4></li>
+            <li class="list-group-item"><p>Population Increase: </p><h4><%=number_with_delimiter(@msa_avg_data.avg_natural_inc)%></h4></li>
+          </ul>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
