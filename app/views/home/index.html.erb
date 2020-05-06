@@ -5,14 +5,15 @@
       <p class="lead">Get Metropolitan Statistical Area Data by Zip Code</p>
     </div>
     <section class='row' style='margin: 0 auto;'>
-      <div class='col-md-6' style='text-align: center; margin: 0 auto;'>
+      <div class='col-md-8' style='text-align: center; margin: 0 auto;'>
         <%= form_tag home_index_path, method: :post do %>
         <div class="input-group mb-3">
           <%= text_field_tag :zip, nil, placeholder: 'Enter zip code to search...', required: true, class: "form-control form-control-md"%>
-          <div class="input-group-append">
+          <div class="input-group-append ">
             <%= submit_tag 'Search', data: { disable_with: 'Searching...' }, class: "btn btn-md btn-outline-dark" %>
           </div>
         </div>
+            <%= link_to 'More Stats!', reports_path, class: "btn btn-md btn-dark" %>
         <% end %>
       </div>
     </section>

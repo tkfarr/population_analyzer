@@ -1,0 +1,25 @@
+<div id='email-div'>
+  <div class="container" style="word-wrap: break-word; white-space: normal; margin-top: 20px;">
+    <h2>Export Data</h2>
+    <section class='row center'>
+      <div class='col-md-8' style='margin: 0 auto;'>
+        <%= form_tag export_reports_path, method: :post do %>
+          <div class="input-group mb-3">
+            <%= text_field_tag :email, '', placeholder: 'Enter the email to send reports to', required: true, class: "form-control form-control-md"%>
+            <div class="input-group-append ">
+              <%= submit_tag 'Export', data: { disable_with: 'Sending...' }, class: "btn btn-md btn-outline-dark" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class='container col-md-12'>
+        <%= link_to 'Cancel', :back %>
+        <% flash.each do |type, msg| %>
+          <div class="<%=type%>">
+            <%= msg %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_001123) do
+ActiveRecord::Schema.define(version: 2020_05_05_183457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,14 +37,38 @@ ActiveRecord::Schema.define(version: 2020_01_21_001123) do
     t.integer "stcou"
     t.string "name"
     t.string "lsad"
-    t.integer "pop_estimate_2010"
-    t.integer "pop_estimate_2011"
-    t.integer "pop_estimate_2012"
-    t.integer "pop_estimate_2013"
-    t.integer "pop_estimate_2014"
-    t.integer "pop_estimate_2015"
+    t.integer "pop_estimate_2010", default: 0
+    t.integer "pop_estimate_2011", default: 0
+    t.integer "pop_estimate_2012", default: 0
+    t.integer "pop_estimate_2013", default: 0
+    t.integer "pop_estimate_2014", default: 0
+    t.integer "pop_estimate_2015", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "pop_change_2010", default: 0
+    t.integer "pop_change_2011", default: 0
+    t.integer "pop_change_2012", default: 0
+    t.integer "pop_change_2013", default: 0
+    t.integer "pop_change_2014", default: 0
+    t.integer "pop_change_2015", default: 0
+    t.integer "births_2010", default: 0
+    t.integer "births_2011", default: 0
+    t.integer "births_2012", default: 0
+    t.integer "births_2013", default: 0
+    t.integer "births_2014", default: 0
+    t.integer "births_2015", default: 0
+    t.integer "deaths_2010", default: 0
+    t.integer "deaths_2011", default: 0
+    t.integer "deaths_2012", default: 0
+    t.integer "deaths_2013", default: 0
+    t.integer "deaths_2014", default: 0
+    t.integer "deaths_2015", default: 0
+    t.integer "natural_inc_2010", default: 0
+    t.integer "natural_inc_2011", default: 0
+    t.integer "natural_inc_2012", default: 0
+    t.integer "natural_inc_2013", default: 0
+    t.integer "natural_inc_2014", default: 0
+    t.integer "natural_inc_2015", default: 0
     t.index ["cbsa_id"], name: "index_msas_on_cbsa_id"
     t.index ["mdiv"], name: "index_msas_on_mdiv"
   end

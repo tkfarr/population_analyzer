@@ -10,9 +10,17 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap
  *= require_tree .
  *= require_self
  */
+
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
 
 html, body {
   height:100%;
@@ -52,4 +60,56 @@ body {
 
 .error {
   color: #dc3545;
+}
+
+.alert {
+  color: #dc3545;
+}
+
+.notice {
+  color: #17a2b8;
+}
+
+#reports-div {
+  border-radius: 10px;
+  background: white;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 90%;
+  width: 90%;
+  box-shadow: 0px 6px 20px 13px rgba(0,0,0,0.75);
+  text-align: center;
+}
+
+#reports-div-body {
+  overflow-y:auto;
+  height: 75%;
+}
+
+#email-div {
+  border-radius: 10px;
+  background: white;
+  margin: 0;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 25%;
+  width: 55%;
+  box-shadow: 0px 6px 20px 13px rgba(0,0,0,0.75);
+  text-align: center;
+}
+
+#home-btn {
+  color: #fff;
+  text-shadow: 1px 1px 1px #ccc;
+  font-size: 1.5em;
+}
+
+#home-btn-div {
+  padding-top: 0px;
+  padding-left: 10px;
 }
