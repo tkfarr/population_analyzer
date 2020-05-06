@@ -16,15 +16,18 @@ class ReportsController < ApplicationController
     redirect_to reports_path
   end
 
+  def email
+  end
+
   def export
-    ExportReportsJob.perform_now(email: 'kekoa428@gmail.com', zip_code: @zip_code, reports: ['msa_avgs_over_years', 'msa_natural_increase_in_county_vs_state'])
+    ExportReportsJob.perform_now(email: reports_params[:email], zip_code: @zip_code, reports: ['msa_avgs_over_years', 'msa_natural_increase_in_county_vs_state']) if reports_params[:email].present?
     redirect_to reports_path, notice: 'Your data is being generated and will be emailed to you.'
   end
 
   private
 
   def reports_params
-    params.permit(:zip_code, :authenticity_token, :commit)
+    params.permit(:zip_code, :authenticity_token, :commit, :email)
   end
 
   def verify_zip

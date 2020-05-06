@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post :index
       post :search_zip
       post :export
+      get :email
     end
   end
 

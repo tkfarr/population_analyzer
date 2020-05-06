@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap
  *= require_tree .
  *= require_self
  */
@@ -61,6 +62,14 @@ body {
   color: #dc3545;
 }
 
+.alert {
+  color: #dc3545;
+}
+
+.notice {
+  color: #17a2b8;
+}
+
 #reports-div {
   border-radius: 10px;
   background: white;
@@ -78,6 +87,20 @@ body {
 #reports-div-body {
   overflow-y:auto;
   height: 75%;
+}
+
+#email-div {
+  border-radius: 10px;
+  background: white;
+  margin: 0;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 25%;
+  width: 55%;
+  box-shadow: 0px 6px 20px 13px rgba(0,0,0,0.75);
+  text-align: center;
 }
 
 #home-btn {
