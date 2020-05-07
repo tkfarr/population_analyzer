@@ -7,12 +7,10 @@ RSpec.describe ReportsController do
       expect(response).to redirect_to(reports_path)
     end
 
-    it 'raises an error with bad email' do
+    xit 'raises an error with bad email' do
       expect {
         post :export, params: { zip_code: '92804', email: 'asdfasdf' }
       }.to raise_error(Net::SMTPFatalError)
-      # post :export, params: { zip_code: '92804', email: 'asdfasdf' }
-      # expect(response).to raise_error()
     end
   end
 end
