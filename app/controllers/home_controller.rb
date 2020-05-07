@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :set_zip_session
+
   def index
     if home_params[:zip]
       search_url = "/api/v1/msas/by_zip?zip=#{home_params[:zip]}"
@@ -15,5 +17,12 @@ class HomeController < ApplicationController
 
   def home_params
     params.permit(:zip)
+  end
+
+  def set_zip_session
+    params[:zip] ||= session[:zip_code]
+    session[:zip_code] = params[:zip]
+
+    @zip_code = params[:zip]
   end
 end

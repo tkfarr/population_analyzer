@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }, {
         max: 100,
         title: {
-          text: 'Percent of State'
+          text: 'Percentage of State Increase'
         },
         opposite: true
       }],
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
           pointPlacement: 0
         },
         {
-          name: 'Percent of State',
+          name: '% of State',
           color: 'rgba(145,238,255,0)',
           data: [parseInt(highChartData.percent_of_state_2010), parseInt(highChartData.percent_of_state_2011), parseInt(highChartData.percent_of_state_2012), parseInt(highChartData.percent_of_state_2013), parseInt(highChartData.percent_of_state_2014), parseInt(highChartData.percent_of_state_2015)],
           tooltip: {
