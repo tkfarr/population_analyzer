@@ -3,8 +3,10 @@ class ReportsController < ApplicationController
   before_action :set_zip_session
 
   def index
-    @msa_avg_data = Report.msa_avgs_over_years(@zip_code) if @zip_code.present?
-    @msa_natural_increase = Report.msa_natural_increase_in_county_vs_state(@zip_code) if @zip_code.present?
+    if @zip_code.present?
+      @msa_avg_data = Report.msa_avgs_over_years(@zip_code)
+      @msa_natural_increase = Report.msa_natural_increase_in_county_vs_state(@zip_code)
+    end
 
     respond_to do |format|
       format.html
@@ -22,6 +24,8 @@ class ReportsController < ApplicationController
   def export
     ExportReportsJob.perform_now(email: reports_params[:email], zip_code: @zip_code, reports: ['msa_avgs_over_years', 'msa_natural_increase_in_county_vs_state']) if reports_params[:email].present?
     redirect_to reports_path, notice: 'Your data is being generated and will be emailed to you.'
+  rescue Net::SMTPFatalError => e
+    redirect_to email_reports_path, alert: e.message
   end
 
   private
