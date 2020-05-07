@@ -60,3 +60,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rubocop', require: false
 
 gem 'chartkick'
+
+# Bug watcher
+gem 'rollbar'
