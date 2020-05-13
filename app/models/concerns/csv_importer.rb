@@ -64,4 +64,9 @@ module CsvImporter
       msa.save
     end
   end
+
+  def self.parse_csv_from_public_files(csv_filename)
+    path = "./public/#{csv_filename}"
+    csv = CSV.parse(File.read(path).scrub)
+  end
 end
