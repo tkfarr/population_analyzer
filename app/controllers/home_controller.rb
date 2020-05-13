@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   before_action :set_zip_session
 
   def index
-    if home_params[:zip]
-      search_url = "/api/v1/msas/by_zip?zip=#{home_params[:zip]}"
+    if @zip_code.present?
+      search_url = "/api/v1/msas/by_zip?zip=#{@zip_code}"
       response = ApiClient.new(search_url).get_url_to_json
       @error = response['error'] if response['error'].present?
       @result = response['data'] if @error.blank?
