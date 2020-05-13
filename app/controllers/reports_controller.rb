@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :verify_zip, only: :search_zip
   before_action :set_zip_session
+  before_action :verify_zip, only: :search_zip
 
   def index
     if @zip_code.present?
@@ -39,8 +39,10 @@ class ReportsController < ApplicationController
   end
 
   def verify_zip
-    ZipCodeService.new(reports_params[:zip_code]).verify
+    ZipCodeService.new(@zip_code).verify
   rescue StandardError => e
+    # remove bad zip from session
+    session[:zip_code] = nil
     redirect_to reports_path, alert: e.message
   end
 

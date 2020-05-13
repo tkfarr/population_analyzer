@@ -61,12 +61,11 @@ module CsvImporter
         lsad: row[4]
       )
       msa.update_msa_changes_from_csv(row)
-      msa.save
     end
   end
 
   def self.parse_csv_from_public_files(csv_filename)
     path = "./public/#{csv_filename}"
-    csv = CSV.parse(File.read(path).scrub)
+    csv = CSV.parse(File.read(path))
   end
 end
