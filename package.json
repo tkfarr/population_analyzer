@@ -10,7 +10,7 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "chartkick": "^3.2.0",
-    "highcharts": "^8.1.0",
+    "highcharts": "^8.1.1",
     "jquery": "^3.5.1",
     "turbolinks": "^5.2.0"
   },
