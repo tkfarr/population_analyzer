@@ -4,10 +4,11 @@ class ApiClient
   end
 
   def get_url_to_json
-    url = URI.parse(build_route)
-    http = Net::HTTP.new(url.host, url.port)
+    url          = URI.parse(build_route)
+    http         = Net::HTTP.new(url.host, url.port)
     http.use_ssl = Rails.env.production?
-    res = http.get(url.request_uri, 'Content-Type' => 'application/json')
+    res          = http.get(url.request_uri, 'Content-Type' => 'application/json')
+
     JSON.parse(res.body)
   end
 

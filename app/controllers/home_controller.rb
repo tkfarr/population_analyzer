@@ -3,10 +3,10 @@ class HomeController < ApplicationController
 
   def index
     if @zip_code.present?
-      search_url = "/api/v1/msas/by_zip?zip=#{@zip_code}"
-      response = ApiClient.new(search_url).get_url_to_json
-      @error = response['error'] if response['error'].present?
-      @result = response['data'] if @error.blank?
+      search_url  = "/api/v1/msas/by_zip?zip=#{@zip_code}"
+      response    = ApiClient.new(search_url).get_url_to_json
+      @error      = response['error'] if response['error'].present?
+      @result     = response['data'] if @error.blank?
       @chart_data = @result.reject{ |key, value| key.exclude?('pop')} if @result.present?
     end
   rescue StandardError => e

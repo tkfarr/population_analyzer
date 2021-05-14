@@ -1,9 +1,10 @@
 namespace :db_cleaner do
   desc "Drop MSAs"
   task drop_data: [ :environment ] do
-    ZipCode.destroy_all
-    Cbsa.destroy_all
-    Msa.destroy_all
+    ZipCode.delete_all
+    Cbsa.delete_all
+    Msa.delete_all
+    CbsasZipCode.delete_all
   end
 
   desc "Import MSAs"
