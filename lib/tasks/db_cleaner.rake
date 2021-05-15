@@ -9,6 +9,11 @@ namespace :db_cleaner do
 
   desc "Import MSAs"
   task import_data: [ :environment ] do
+    ZipCode.delete_all
+    Cbsa.delete_all
+    Msa.delete_all
+    CbsasZipCode.delete_all
+
     zip_csv = CsvImporter.parse_csv_from_public_files('zip_to_cbsa.csv')
     CsvImporter.import_zip_to_cbsa_csv(zip_csv)
 
